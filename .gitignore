@@ -1,0 +1,37 @@
+# Ignore model files
+*.safetensors
+
+# Ignore configuration files (if sensitive)
+config.json
+special_tokens_map.json
+tokenizer_config.json
+
+# Ignore raw data files
+Mental-Health-Twitter.csv
+
+# Ignore Python notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore virtual environment folders (if any)
+venv/
+env/
+
+# Ignore cache and temporary files
+__pycache__/
+*.pyc
+*.pyo
+*.tmp
+
+# Ignore log files
+*.log
+
+# Ignore large text files (if not needed)
+vocab.txt
+
+# Ignore system-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE-specific files and folders
+.vscode/
+.idea/
