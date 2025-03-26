@@ -1,0 +1,155 @@
+/* static/styles.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+h1 {
+    color: #ff85a2;
+    font-size: 1.8rem;
+}
+
+.reset-btn {
+    background-color: #ff85a2;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.reset-btn:hover {
+    background-color: #ff6b8b;
+}
+
+.chat-container {
+    flex: 1;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    overflow-y: auto;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.message {
+    margin-bottom: 15px;
+    display: flex;
+}
+
+.message.user {
+    justify-content: flex-end;
+}
+
+.message.bot {
+    justify-content: flex-start;
+}
+
+.bubble {
+    max-width: 70%;
+    padding: 12px 18px;
+    border-radius: 20px;
+    margin: 5px 0;
+}
+
+.message.user .bubble {
+    background-color: #ff85a2;
+    color: white;
+}
+
+.message.bot .bubble {
+    background-color: #e8f4f8;
+    color: #333;
+}
+
+.input-area {
+    display: flex;
+    gap: 10px;
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    font-size: 16px;
+}
+
+button[type="submit"] {
+    background-color: #ff85a2;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #ff6b8b;
+}
+
+/* Add these styles to handle formatted text */
+.bubble {
+    white-space: pre-wrap;
+    word-break: break-word;
+    line-height: 1.6;
+}
+
+.bubble ul {
+    margin: 10px 0;
+    padding-left: 25px;
+}
+
+.bubble li {
+    margin-bottom: 8px;
+}
+
+.bubble h3 {
+    margin: 15px 0 10px;
+    color: #ff6b8b;
+    font-size: 1.1em;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .bubble {
+        max-width: 85%;
+    }
+}

@@ -1,0 +1,33 @@
+<!-- templates/chat.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health Companion</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌸 Mental Health Companion</h1>
+            <form action="/reset" method="post">
+                <button type="submit" class="reset-btn">New Chat</button>
+            </form>
+        </div>
+        
+        <div class="chat-container">
+            {% for message in chat_history %}
+                <div class="message {{ 'user' if message.role == 'user' else 'bot' }}">
+                    <div class="bubble">{{ message.content|safe }}</div>
+                </div>
+            {% endfor %}
+        </div>
+        
+        <form method="POST" class="input-area">
+            <input type="text" name="message" placeholder="Type your message here..." autocomplete="off">
+            <button type="submit">Send</button>
+        </form>
+    </div>
+</body>
+</html>
