@@ -80,15 +80,23 @@ h1 {
     margin: 5px 0;
 }
 
-.message.user .bubble {
-    background-color: #ff85a2;
-    color: white;
-}
-
+/* Chat bubble styling */
 .message.bot .bubble {
-    background-color: #e8f4f8;
+    background-color: #e8f4f8; /* Light blue for bot messages */
     color: #333;
 }
+
+.message.user .bubble {
+    background-color:  #ff85a2; /* Light orange for user messages */
+    color: #333;
+}
+
+.bubble {
+    padding: 12px 18px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+}
+
 
 .input-area {
     display: flex;
@@ -119,7 +127,15 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-    background-color: #ff6b8b;
+    background-color: #ff85a2;
+}
+
+.input-area {
+    display: flex;
+}
+
+input[type="text"] {
+    flex-grow: 3;
 }
 
 /* Add these styles to handle formatted text */

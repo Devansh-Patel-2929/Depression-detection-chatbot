@@ -70,41 +70,59 @@ def predict_depression(text):
 
 def format_response(raw_text):
     # Convert markdown-like formatting to HTML
-    formatted = raw_text.replace('**', '<strong>').replace('**', '</strong>')
-    formatted = formatted.replace('* ', '• ')
-    
+    formatted = raw_text.replace('**', '').replace('__', '')
+
+    # Add emojis for a more engaging response
+    formatted = formatted.replace("sadness", "😢 sadness")
+    formatted = formatted.replace("friends", "👫 friends")
+    formatted = formatted.replace("family", "👨‍👩‍👧‍👦 family")
+    formatted = formatted.replace("professional help", "🧑‍⚕️ professional help")
+    formatted = formatted.replace("joy", "😊 joy")
+    formatted = formatted.replace("exercise", "🏃‍♂️ exercise")
+    formatted = formatted.replace("creative pursuits", "🎨 creative pursuits")
+    formatted = formatted.replace("volunteering", "🤝 volunteering")
+
     # Add line breaks for better spacing
     formatted = '\n'.join([line.strip() for line in formatted.split('\n') if line.strip()])
-    
+
+    # Add bullet points for suggestions
+    if "suggestions" in raw_text.lower():
+        formatted = formatted.replace("* ", "• ")
+
     return formatted
 
+
 def generate_response(user_input, history):
+    # Define allowed topics
     system_messages = {
-        'high': "Provide empathetic support with maximum 3 concise paragraphs. Use bullet points when possible.",
-        'moderate': "Respond with 2-3 brief paragraphs. Include 1-3 bullet points for suggestions.",
-        'low': "Keep responses under 2 short paragraphs. Use simple language."
+        'high': "Provide empathetic support with 1-2 concise paragraphs.",
+        'moderate': "Respond with 1 brief paragraph.",
+        'moderate': "keep conversation open for response.",
+        'low': "Keep responses under 2 sentences."
     }
-    
+
     depression_prob = predict_depression(user_input)
     risk_level = 'high' if depression_prob > 0.7 else 'moderate' if depression_prob > 0.4 else 'low'
-    
+
     chatml_prompt = f"<|im_start|>system\n{system_messages[risk_level]}<|im_end|>\n"
     for msg in history[-4:]:
         role = 'user' if msg['role'] == 'user' else 'assistant'
         chatml_prompt += f"<|im_start|>{role}\n{msg['content']}<|im_end|>\n"
+
     chatml_prompt += f"<|im_start|>user\n{user_input}<|im_end|>\n<|im_start|>assistant\n"
-    
+
     response = llm_model(
         prompt=chatml_prompt,
-        max_tokens=300,  # Reduced from 512
+        max_tokens=150,  # Shortened response length
         temperature=0.7,
         top_p=0.9,
         repeat_penalty=1.1,
         stop=["<|im_end|>"]
     )
-    
+
     raw_response = response['choices'][0]['text'].split('<|im_end|>')[0].strip()
     return format_response(raw_response)
+
 
 @app.route('/', methods=['GET', 'POST'])
 def chat():
